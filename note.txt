@@ -1,0 +1,19 @@
+commits = mise a jour du code
+
+git satus = cela permet de savoir les modifications que l'on a change en local par rapport a laversion sur github.
+
+-mise a jour:
+
+crée un comit local: git comit -am "message"
+crée un comit en ligne: git pull -am "message"
+
+def branche:
+dev:
+branche main = master(code de base)
+branche dev = nouvelle mise a jour(comite) = permet de tester les nouvelles mise a jour pour ne pas toucher directement au master
+
+git stash = suprime toute les modifications (atention)
+
+
+
+
