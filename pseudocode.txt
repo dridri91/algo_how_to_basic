@@ -1,0 +1,30 @@
+entrer coup pour ja:
+definir coup pour jb : 
+	utiliser une fonction type random, prendre en parametre de cette fonction le temps au format 00h:00m:00s:00ms pour avoir un chiffre aléatoire à notre échelle
+
+feuille = 1
+pierre = 2
+ciseau = 3
+
+fonction SUPERIORITE conditions gagne, prendre en parametre feuille ciseau et pierre(1,2 ou 3 ) :
+
+	si variable joueur ( b ) = 1: 
+		si ja = 2:
+			retourner victoire jb
+		else 
+			retourner victoire ja
+
+	si variable joueur ( b ) = 2:
+		si ja = 1
+			retourner victoire ja
+		else 
+			retourner victoire jb
+
+	si variable joueur ( b ) = 3:
+		si ja = 1
+			retourner victoire jb
+		else 
+			retourner victoire ja
+
+création liste qui va prendre :
+	
