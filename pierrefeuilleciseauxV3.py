@@ -36,8 +36,6 @@ class game:
             self.points_2 += +1
         
 
-        else:
-            print("égalité")
         
 
 
@@ -45,15 +43,16 @@ class game:
         
         if self.points_1 > self.points_2:
             print("joueur1 gagne ! ")
-            print(self.points_1)
+            print(self.points_1, "points !")
 
         elif self.points_1 == self.points_2:
-            print(0)
+            print("égalité !")
+            print(0, "point")
 
 
         else:
             print("joueur2 gagne !")
-            print(self.points_2)
+            print(self.points_2, "points !")
 
             
 
@@ -61,7 +60,8 @@ Partie1 = game("adrien","Paul",3)
 for nbmanche in range(1,Partie1.nbmanche + 1):
     Partie1.partie()
     Partie1.regle()
-    Partie1.victoire()
+Partie1.victoire()
+
 
 
 
