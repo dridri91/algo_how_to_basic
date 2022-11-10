@@ -1,64 +1,70 @@
 import random
+import os
 
-class Partie:
+xdg = 'start' if os.name=='nt' else 'xdg-open'
+
+class Game:
     def __init__(self):
-        self.nombre = 3
-        self.j1 = Joueur(input('Quel est le nom du premier joueur (entrer bot pour un bot) : \n'))
-        self.j2 = Joueur(input('Quel est le nom du premier joueur (entrer bot pour un bot) : \n'))
-        print(f'Bienvenue dans ce jeu de pierre papier ciseau.\nCette partie se fait en {self.nombre} points gagnants.\n')
-        
+        self.number = -1
+        while self.number <1:
+            try :
+                self.number = int(input('En combien de points voulez vous jouer ?'))
+            except:
+                print('Mauvaise saisie')
+                
+        self.j1 = Joueur(input(
+            'Quel est le nom du premier joueur (entrer bot pour un bot) : \n'))
+        self.j2 = Joueur(input(
+            'Quel est le name du premier joueur (entrer bot pour un bot) : \n'))
+        print(f"""Bienvenue dans ce jeu de pierre papier ciseau.\n
+               Cette partie se fait en {self.number} points gagnants.\n""")
 
     def manche(self):
-        a = self.j1.jouer()
-        b = self.j2.jouer()
-        gagnant = self.winner(a,b)
-        if gagnant == "egalite":
-            print('pas de gagnant pour cette manche\n')
+        a = self.j1.play()
+        b = self.j2.play()
+        player_winner = self.winner(a, b)
+        if player_winner:
+            player_winner.victory()
         else:
-            gagnant.victoire()
+            print('pas de gagnant pour cette manche\n')
 
-    def afficher_score(self):
+    def prompt_scoreboard(self):
         self.j1.score()
         self.j2.score()
 
     def  winner(self, play1, play2):
-        possiblilities = ['pierre', 'papier', 'ciseau']
-    
-        #return ['egalite',self.joueur1,self.joueur2][possiblilities.index(play1)-possiblilities.index(play2)%3]
-        return ['egalite',self.j1,self.j2][possiblilities.index(play1)-possiblilities.index(play2)%3]
+        play = ['pierre', 'papier', 'ciseau']
+        return [None, self.j1, self.j2][play.index(play1)-play.index(play2)]
 
-    def lancement(self):
-        while self.j1.point < 3 and self.j2.point < 3:    
+    def start(self):
+        while self.j1.point < self.number and self.j2.point < self.number:    
             self.manche()
-            self.afficher_score()
+            self.prompt_scoreboard()
 
-
-    
+        if self.j1.point+self.j2.point == self.number:
+            os.system(xdg + ' https://www.youtube.com/watch?v=dQw4w9WgXcQ')
 
 class Joueur:
-    def __init__(self, nom):
-        self.nom = nom
+    def __init__(self, name):
+        self.name = name
         self.point = 0
     
     def score(self):
-        print('Le joueur '+self.nom + ' a ' + str(self.point) +  ' points.')
+        print('Le joueur '+self.name + ' a ' + str(self.point) +  ' points.')
 
-    def victoire(self):
+    def victory(self):
         self.point+=1
-        print(self.nom + ' a remporté cette manche !\n')
+        print(self.name + ' a remporté cette manche !\n')
 
-    def jouer(self):
-        if self.nom == 'bot':
+    def play(self):
+        if self.name == 'bot':
             action = random.choice(['pierre','papier','ciseau'])
             print('Le bot a choisi '+action+'\n')
         else:
-            action = input(f'Que voulez vous jouer {self.nom} ? (pierre / papier / ciseau) :\n')
+            action = input(f'Que voulez vous jouer {self.name} ? (pierre / papier / ciseau) :\n')
+            while action not in ['pierre','papier','ciseau']:
+                action = input('Entrez une bonne valeur : ')
         return action    
 
-
-
-
-
-a = Partie()
-
-a.lancement()
+a = Game()
+a.start()
