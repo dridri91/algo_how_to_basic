@@ -5,7 +5,7 @@ grid = [[0,0,0]for i in range(3)]
 end = False
 turn = 1
 tie = 0
-6
+
 def test(i,j):
     global grid,turn,end,tie
     if not end:
